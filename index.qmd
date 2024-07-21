@@ -1,0 +1,77 @@
+---
+title: "Intro to Data Visualization with Python"
+---
+
+This workshop introduces you the art and science of data visualization. You'll learn the basic principles of effective data visualization, and get hands-on with popular Python libraries to create your own compelling plots.
+
+------------------------------------------------------------------------
+
+### What To Prepare
+
+In this workshop, we will mostly use [Google Colab](https://colab.research.google.com/) as our coding environment. Google Colab is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources.
+
+Please make sure you have a Google account and can access Google Colab. If you have not used Google Colab before, please go through the three Colab tutorials below to get familiar with the environment.
+
+-   [Welcome to Colab!](https://colab.research.google.com/)
+-   [Overview of Colab](https://colab.research.google.com/notebooks/basic_features_overview.ipynb)
+-   [Guide to Markdown](https://colab.research.google.com/notebooks/markdown_guide.ipynb)
+
+If you want to get a head start on basic plotting in Python, you can work through the below notebook from Google.
+
+-   [Charts: visualizing data](https://colab.research.google.com/notebooks/charts.ipynb)
+
+------------------------------------------------------------------------
+
+### Part I: Principles & Good Practices
+
+In other words, what is a good chart and how to make one.
+
+-   Slides (*coming soon*)
+
+### Part II: Intro to Matplotlib
+
+1.  Concept and basic plots
+    -   Slides (*coming soon*)
+    -   Notebook 1: Concepts (*coming soon*)
+    -   Notebook 2: Basic plots (*coming soon*)
+
+2.  From default to publication-ready
+    -   Slides (*coming soon*)
+    -   Notebook: Mag 7 (*coming soon*)
+
+### Part III: Plotting Maps (with Geopandas and Matplotlib)
+
+1.  Spatial data basics and plotting
+    -   Slides (*coming soon*)
+    -   Notebook: Geopandas intro (*coming soon*)
+    
+2.  Reproducing the [Toronto Parking Tickets Visualization](https://schoolofcities.github.io/parking-tickets-toronto/)
+    -   Notebook: Parking tickets (*coming soon*)
+
+### Part IV: Dashboarding (with Quarto and Plotly Express)
+
+-  Slides (*coming soon*)
+-  code 1: Client-only interactivity (*coming soon*)
+-  code 2: py-shiny-based interactivity (*coming soon*)
+
+------------------------------------------------------------------------
+
+### Resources
+
+-   Learning
+    -   [Good Charts](https://scottberinato.com/good-charts-book/) by Scott Berinato (main reference for Part I; available via UofT library.)
+    -   [Scientific Visualization: Python + Matplotlib](https://inria.hal.science/hal-03427242/) by Nicolas P. Rougier (mastering Matplotlib)
+    -   [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) by Claus O. Wilke
+    -   Datawrapper [Blog](https://blog.datawrapper.de/)
+    -   [Flowing Data](https://flowingdata.com/) by Nathan Yau
+    -   [From Data to Viz](https://www.data-to-viz.com/) (sample code of various types of charts)
+-   Inspiration
+    -   Joseph's [Github dataviz repo](https://github.com/JosephBARBIERDARNAL/misc-dataviz) (Python)
+    -   Tanya Shapiro's [GitHub Gallery](https://github.com/tashapiro) (R)
+    -   [Dataviz Inspiration](https://www.dataviz-inspiration.com/) (various tools)
+    -   [Fronkonstin](https://fronkonstin.com/tag/ggplot2/) (R)
+    -   [Data Imaginist](https://thomaslinpedersen.art/work/#category=R) (R)
+
+------------------------------------------------------------------------
+
+Back to [TDMDAL Computing Page](https://tdmdal.github.io/)
