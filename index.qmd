@@ -24,20 +24,20 @@ If you want to get a head start on basic plotting in Python, you can work throug
 
 ### Part I: Principles & Good Practices
 
-In other words, what is a good chart and how to make one.
+In other words, what is a good chart, and a good way to make one.
 
--   Slides (*coming soon*)
+-   [Slides](part_1/intro_dv.pdf)
 
 ### Part II: Intro to Matplotlib
 
-1.  Concept and basic plots
-    -   Slides (*coming soon*)
-    -   Notebook 1: Concepts (*coming soon*)
-    -   Notebook 2: Basic plots (*coming soon*)
+1.  Concepts and basic plots
+    -   [Slides](part_2/matplotlib_concepts_basic_plots.pdf)
+    -   Notebook 1: Concepts ( [![](colab-badge.svg)](https://colab.research.google.com/github/tdmdal/mma-dv-2024/blob/master/docs/part_2/matplotlib_intro.ipynb) )
+    -   Notebook 2: Basic plots ( [![](colab-badge.svg)](https://colab.research.google.com/github/tdmdal/mma-dv-2024/blob/master/docs/part_2/gapminder.ipynb) )
 
 2.  From default to publication-ready
-    -   Slides (*coming soon*)
-    -   Notebook: Mag 7 (*coming soon*)
+    -   [Slides](part_2/matplotlib_default_to_pub.pdf)
+    -   Notebook: Mag 7 ( [![](colab-badge.svg)](https://colab.research.google.com/github/tdmdal/mma-dv-2024/blob/master/docs/part_2/mag7.ipynb) )
 
 ### Part III: Plotting Maps (with Geopandas and Matplotlib)
 
