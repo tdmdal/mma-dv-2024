@@ -42,11 +42,11 @@ In other words, what is a good chart, and a good way to make one.
 ### Part III: Plotting Maps (with Geopandas and Matplotlib)
 
 1.  Spatial data basics and plotting
-    -   Slides (*coming soon*)
-    -   Notebook: Geopandas intro (*coming soon*)
+    -   [Slides](part_3/geopandas_matplotlib_map.pdf)
+    -   Notebook: Geopandas intro ( [![](colab-badge.svg)](https://colab.research.google.com/github/tdmdal/mma-dv-2024/blob/master/docs/part_3/geopandas_intro.ipynb) )
     
 2.  Reproducing the [Toronto Parking Tickets Visualization](https://schoolofcities.github.io/parking-tickets-toronto/)
-    -   Notebook: Parking tickets (*coming soon*)
+    -   Notebook: Parking tickets ( [![](colab-badge.svg)](https://colab.research.google.com/github/tdmdal/mma-dv-2024/blob/master/docs/part_3/parking_tickets_toronto.ipynb) )
 
 ### Part IV: Dashboarding (with Quarto and Plotly Express)
 
