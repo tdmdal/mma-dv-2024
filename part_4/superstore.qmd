@@ -1,0 +1,121 @@
+---
+title: "Superstore"
+format:
+  dashboard:
+    logo: super.png
+---
+
+```{python}
+import pandas as pd
+import plotly.express as px
+
+# specify the year to aggregate the data
+year = 2017
+
+# read data and filter in the specified year
+# https://public.tableau.com/app/learn/sample-data
+ss = pd.read_csv("superstore.csv", parse_dates=["Order Date", "Ship Date"])
+ss = ss[ss["Ship Date"].dt.year==year]
+
+# calculate total sales and profit
+sales = ss["Sales"].sum()
+profit = ss["Profit"].sum()
+
+# calculate sales and profit by state, segment, category and subcategory
+sp_by_state = ss.groupby(by=["State", "State Abbr"])[["Sales", "Profit"]].sum().reset_index()
+sp_by_segment = ss.groupby(by=["Segment"])[["Sales", "Profit"]].sum().reset_index()
+sp_by_category = ss.groupby(by=["Category"])[["Sales", "Profit"]].sum().reset_index()
+sp_by_subcategory = ss.groupby(by=["Sub-Category"])[["Sales", "Profit"]].sum().reset_index()
+```
+
+# Sales (`{python} year`)
+
+## Row {height=15%}
+
+```{python}
+#| content: valuebox
+#| title: "Total Sales"
+dict(
+  icon = "graph-up",
+  color = "light",
+  value = f"${sales:,.0f}"
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: "Total Profit"
+dict(
+  icon = "graph-up",
+  color = "light",
+  value = f"${profit:,.0f}"
+)
+```
+
+## Row {height=35%}
+
+```{python}
+#| title: Sales by State
+#| padding: 0
+
+# https://plotly.com/python/bubble-maps/
+# https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo
+fig = px.scatter_geo(sp_by_state[["State", "State Abbr", "Sales"]], 
+                     locations="State Abbr", 
+                     locationmode = "USA-states",
+                     hover_name="State",
+                     hover_data={"Sales": ":$,.2f", "State Abbr": False},
+                     size="Sales",
+                     size_max=50,
+                     scope="usa")
+fig.show()
+```
+
+```{python}
+#| title: Sales by Segment
+#| padding: 0
+
+# https://plotly.com/python/bar-charts/
+# https://plotly.com/python/reference/bar/
+# https://plotly.com/python-api-reference/generated/plotly.express.bar.html
+fig = px.bar(sp_by_segment[["Segment", "Sales"]],
+             x="Segment",
+             y="Sales")
+fig.show()
+```
+
+## Row {height=35%}
+
+```{python}
+#| title: Sales by Category
+#| padding: 0
+
+fig = px.bar(sp_by_category[["Category", "Sales"]],
+             x="Category",
+             y="Sales")
+fig.show()
+```
+
+```{python}
+#| title: Sales by Sub-Category
+#| padding: 0
+sales_by_subcategory_top10 = sp_by_subcategory[["Sub-Category", "Sales"]].sort_values(by=['Sales'], ascending=False).head(10)
+fig = px.bar(sales_by_subcategory_top10,
+             x="Sales",
+             y="Sub-Category",
+             orientation='h')
+fig.update_layout(yaxis={'categoryorder':'total ascending'})
+# fig.show()
+```
+
+## Row {height=15%}
+
+::: {.card title="Source"}
+1. Data: [Superstore Sales](https://public.tableau.com/app/learn/sample-data) from Tableau Sample Data
+
+2. Store Icon: [Superman icons](https://www.flaticon.com/free-icons/superman) created by Kalashnyk - Flaticon
+:::
+
+# Profit (`{python} year`)
+
+**It's Your Turn to Build.**

@@ -1,0 +1,159 @@
+---
+title: "Superstore V2"
+format:
+  dashboard:
+    logo: super.png
+server: shiny
+---
+
+```{python}
+import pandas as pd
+import plotly.express as px
+from shiny.express import render, ui
+from shiny import reactive
+import shiny
+from shinywidgets import render_widget
+
+# https://public.tableau.com/app/learn/sample-data
+ss = pd.read_csv("superstore.csv", parse_dates=["Order Date", "Ship Date"])
+year_all = sorted(list(ss["Ship Date"].dt.year.unique()))
+```
+
+## {.sidebar}
+```{python}
+ui.input_select(id="year", 
+                label="Year:",
+                choices=list(map(str, year_all)),
+                selected=str(min(year_all)))
+
+ui.input_radio_buttons(id="metric",
+                       label="Metric",
+                       choices={"Sales": "Sales", "Profit": "Profit"},
+                       selected="Sales")
+```
+
+___
+
+**Source**
+
+Data: [Superstore Sales](https://public.tableau.com/app/learn/sample-data) from Tableau Sample Data
+
+Store Icon: [Superman icons](https://www.flaticon.com/free-icons/superman) created by Kalashnyk - Flaticon
+
+```{python}
+@reactive.calc
+def ss_year():
+    return ss[ss["Ship Date"].dt.year==int(input.year())]
+
+@reactive.calc
+def sales():
+    return ss_year()["Sales"].sum()
+
+@reactive.calc
+def profit():
+    return ss_year()["Profit"].sum()
+
+@reactive.calc
+def by_state():
+    bs = ss_year().groupby(by=["State", "State Abbr"])[input.metric()].sum().reset_index()
+
+    # handle potential negative profit
+    bs["neg"] = bs[input.metric()] < 0
+    bs[input.metric()+"_plot"] = bs[input.metric()].abs()
+    return bs
+
+@reactive.calc
+def by_segment():
+    return ss_year().groupby(by=["Segment"])[input.metric()].sum().reset_index()
+
+@reactive.calc
+def by_category():
+    return ss_year().groupby(by=["Category"])[input.metric()].sum().reset_index()
+
+@reactive.calc
+def by_subcategory_top10():
+    by_subcategory = ss_year().groupby(by=["Sub-Category"])[input.metric()].sum().reset_index()
+    return by_subcategory.sort_values(by=[input.metric()], ascending=False).head(10)
+```
+
+## Column {width=20%}
+```{python}
+#| title: Total Sales
+#| padding: 0
+@render.ui
+def sales_value_box():
+    return shiny.ui.value_box(title="", value=f"${sales():,.0f}")
+```
+
+```{python}
+#| title: Total Profit
+#| padding: 0
+@render.ui
+def profit_value_box():
+    return shiny.ui.value_box(title = "", value = f"${profit():,.0f}")
+```
+
+## Column {width=40%}
+```{python}
+#| title: by State
+#| padding: 0
+
+# https://plotly.com/python/bubble-maps/
+# https://plotly.com/python-api-reference/generated/plotly.express.scatter_geo
+@render_widget
+def plot_by_state():
+    fig = px.scatter_geo(by_state(),
+                         locations="State Abbr",
+                         locationmode = "USA-states",
+                         hover_name="State",
+                         hover_data={input.metric(): ":$,.2f", 
+                                     "State Abbr": False,
+                                     "neg": False,
+                                     input.metric()+"_plot": False},
+                         size=input.metric()+"_plot",
+                         size_max=50,
+                         color="neg",
+                         scope="usa")
+    fig.layout.update(showlegend=False, title_text=input.metric()+" by State", title_x=0.5, title_y=0.05)
+    return fig
+```
+
+```{python}
+#| title: by Segment
+#| padding: 0
+
+# https://plotly.com/python/bar-charts/
+# https://plotly.com/python/reference/bar/
+# https://plotly.com/python-api-reference/generated/plotly.express.bar.html
+@render_widget
+def plot_by_segment():
+    return px.bar(by_segment(),
+                  x="Segment",
+                  y=input.metric())
+```
+
+## Column {width=40%}
+```{python}
+#| title: by Category
+#| padding: 0
+
+@render_widget
+def plot_by_category():
+    return px.bar(by_category(),
+                  x="Category",
+                  y=input.metric())
+```
+
+```{python}
+#| title: by Sub-Category (top 10)
+#| padding: 0
+
+@render_widget
+def plot_by_subcategory():
+    fig = px.bar(by_subcategory_top10(),
+                 x=input.metric(),
+                 y="Sub-Category",
+                 orientation='h')
+    fig.update_layout(yaxis={'categoryorder':'total ascending'})
+    return fig
+```

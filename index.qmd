@@ -50,9 +50,10 @@ In other words, what is a good chart, and a good way to make one.
 
 ### Part IV: Dashboarding (with Quarto and Plotly Express)
 
--  Slides (*coming soon*)
--  code 1: Client-only interactivity (*coming soon*)
--  code 2: py-shiny-based interactivity (*coming soon*)
+-  [Slides](part_4/dashboard.pdf)
+-  Code 1: Client-only interactivity ([superstore.qmd](part_4/superstore.qmd))
+-  Code 2: Py-shiny-based interactivity ([superstore-v2.qmd](part_4/superstore-v2.qmd))
+-  Assets: Superstore [data](part_4/superstore.csv) and [logo](/part_4/super.png)
 
 ------------------------------------------------------------------------
 
